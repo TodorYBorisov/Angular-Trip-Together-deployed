@@ -81,7 +81,7 @@ The Angular frontend of Trip Together is deployed on [Netlify](https://www.netli
 
 The MongoDB database used for Trip Together is hosted on [MongoDB Cloud](https://cloud.mongodb.com). MongoDB Cloud provides a dependable and expandable solutions for storing data for the application
 
-In case of (CORS) error install addon/extension:![CORS Everywhere](trip-together/src/assets/images/Firefox.JPG) CORS Everywhere for Firefox and ![Chrome](trip-together/src/assets/images/Chrome.JPG)
+- Access to the already deployed application [Trip Together](https://triptogether1.netlify.app)
 
 ## Project architecture
 - App Module
