@@ -1,0 +1,34 @@
+<!--Catalog-->
+<ng-container></ng-container>
+
+<div *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>
+
+<section id="catalogPage" *ngIf="!isLoading">
+  <div *ngIf="!thereAreNoTtrips">
+    <h1>Welcome to your next trip!</h1>
+  </div>
+
+  <div *ngFor="let trip of tripList" class="card-box">
+    <img src="{{trip.imageUrl}}">
+    <div>
+      <div class="text-center">
+        <p class="name"><i class="fas fa-route"></i><span>-From: {{trip.startPoint}} </span> -<span>To:
+            {{trip.endPoint}} </span></p>
+        <p class="artist"><i class="far fa-calendar-alt"></i> Date: <span>{{trip.date}}</span></p>
+        <p class="genre"><i class="far fa-clock"></i> Time: <span>{{trip.time}}</span></p>
+        <p class="price"><i class="fas fa-hand-holding-usd"></i> Price: <span>{{trip.price}}</span> BGN</p>
+      </div>
+      <div class="btn-group" *ngIf="isLogged">
+        <!-- <a routerLink="/trip/details/{{trip._id}}" id="details">Details</a> -->
+        <a [routerLink]="['/trip','details', trip._id]" id="details">Details</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-trips" *ngIf="thereAreNoTtrips">
+    <h3>No available trips at the moment!</h3>
+    <h2>Come back later.</h2>
+  </div>
+</section>

@@ -1,0 +1,75 @@
+
+<div class="search">
+    <form #form="ngForm" (submit)="onSubmit()">
+        <input type="text" placeholder="Search by City" name="city" [(ngModel)]="cityName" ngModel #inputQuery="ngModel" required [minlength]="3">
+        <ng-container *ngIf="inputQuery.invalid && inputQuery.touched">
+            <div class="error" *ngIf="inputQuery.errors?.['required']">City is required!</div>
+            <div class="error" *ngIf="inputQuery.errors?.['minlength']">City must be at least 3 characters long!
+            </div>
+          </ng-container>
+          <button type="submit" [disabled]="form.invalid"></button>
+    </form>
+</div>
+
+<div class="container" *ngIf="weatherData">
+    <div class="upper-data">
+        <img src="../../../assets/weather/weather-images.jpg" *ngIf="(weatherData.main.temp | tempConvertor) > 15">
+        <!-- <img src="../../../assets/weather/coldNight.JPG" *ngIf="(weatherData.main.temp | tempConvertor) <= 15"> -->
+
+        <div class="weather-data">
+            <div class="location">{{weatherData.name}}</div>
+            <div class="temperature">{{(weatherData.main.temp | tempConvertor) | number: '1.0-0'}}°C</div> 
+
+        </div>
+    </div>
+
+    <div class="lower-data">
+        <div class="more-info-lable">
+            More information
+        </div>
+
+        <div class="more-info-container">
+            <div class="info-block">
+                <div class="info-block-lable">
+                    <img src="../../../assets/weather/low-temperature-128.png">
+                    <span>Min</span>
+                </div>
+                <div class="info-block-value">
+                    {{(weatherData.main.temp_min | tempConvertor)}}°C
+                </div>
+            </div>
+            <div class="info-block">
+                <div class="info-block-lable">
+                    <img src="../../../assets/weather/high-temperature-128.png">
+                    <span>Max</span>
+                </div>
+                <div class="info-block-value">
+                    {{(weatherData.main.temp_max | tempConvertor)}}°C
+                </div>
+            </div>
+
+            <div class="info-block">
+                <div class="info-block-lable">
+                    <img src="../../../assets/weather/humidity-17-128.png">
+                    <span>Humidity</span>
+                </div>
+                <div class="info-block-value">
+                    {{weatherData.main.humidity}}%
+                </div>
+            </div>
+
+            <div class="info-block">
+                <div class="info-block-lable">
+                    <img src="../../../assets/weather/windSpead.png">
+                    <span>Wind</span>
+                </div>
+                <div class="info-block-value">
+                    {{weatherData.wind.speed}} km/h
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- alt +° 0176 за градуси -->

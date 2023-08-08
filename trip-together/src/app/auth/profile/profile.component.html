@@ -1,0 +1,67 @@
+<section class="profile col-md-6 text-center col-lg" id="profile-page">
+
+    <div class="profile-container">
+        <!-- Gender of the user determines which picture is displayed as their avatar -->
+        <img class="profile-img" src="../../../assets/images/{{gender}}.png" alt="user-picture">
+        <ng-container *ngIf="!isEditMode">
+            <p>Username: <span>{{profileDetails.username}}</span></p>
+            <p><i class="fa-solid fa-envelope" style="margin: 3px;"></i>Email: <span>{{profileDetails.email}}</span>
+            </p>
+            <p><i class="fa-solid fa-phone-volume" style="margin: 3px;"></i>Phone: <span>{{profileDetails.tel}}</span>
+            </p>
+            <button class="edit-button" (click)="toggleEditMode()">Edit Profile</button>
+        </ng-container>
+
+        <ng-container *ngIf="isEditMode">
+            <form [formGroup]="form" (ngSubmit)="saveProfileHandler()">
+                <div class="flex">
+                    <p>Username: </p>
+                    <input type="text" name="username" id="username" value="Johny" formControlName="username">
+                </div>
+                <!-- user validation -->
+                <ng-container *ngIf="form.get('username')?.touched">
+                    <p class="error" *ngIf="form.get('username')?.errors?.['required']"> Username is required!</p>
+                    <p class="error" *ngIf="form.get('username')?.errors?.['minlength']"> Username should be longer than
+                        5 chars!</p>
+                </ng-container>
+
+                <div class="flex">
+                    <p>Email: </p>
+                    <input type="email" name="email" id="email" value="john.doe@gmail.com" formControlName="email">
+                </div>
+                <!-- email validation -->
+                <ng-container *ngIf="form.get('email')?.touched">
+                    <p class="error" *ngIf="form.get('email')?.errors?.['required']">Email is required!</p>
+                    <p class="error" *ngIf="form.get('email')?.errors?.['emailValidator']">Email is not valid!</p>
+                </ng-container>
+
+                <div class="flex">
+                    <p>Phone: </p>
+                    <div>
+                        <input type="text" name="tel" id="tel" value="885 888 888" formControlName="tel">
+                    </div>
+                </div>
+
+                <ng-container *ngIf="form.get('tel')?.touched">
+                    <p class="error" *ngIf="form.get('tel')?.errors?.['required']">Telephone is required!</p>
+                </ng-container>
+                <button class="green-button">Save Profile</button>
+            </form>
+        </ng-container>
+    </div>
+
+    <div class="profile-info">
+        <p class="count">My Trips History: <span>{{tripsFound.length}}</span> created trips</p>
+
+        <ng-container *ngIf="tripsFound.length>0; else noTrips">
+        <div class="trips-info">
+            <div *ngFor="let trip of tripsFound" >
+                <a class="my-trip" [routerLink]="['/trip','details', trip._id]">From <span>{{trip.startPoint}}</span> to <span>{{trip.endPoint}}</span> on <span>{{trip.date}}</span> at <span>{{trip.time}}</span>.</a>
+            </div>
+        </div>
+    </ng-container>
+        <ng-template #noTrips>
+            <p>There are no offer trips yet.</p>
+        </ng-template>
+    </div>
+</section>

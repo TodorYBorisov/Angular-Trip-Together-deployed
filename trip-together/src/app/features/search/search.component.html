@@ -1,0 +1,49 @@
+<section id="searchPage">
+  <h1>Search trip by Start and End point</h1>
+  <div class="error" *ngIf="errorMsgFromServer">{{errorMsgFromServer}}</div>
+  <div class="search">
+    <input id="search-input" type="text" ngModel #inputQuery="ngModel" name="search" placeholder="Enter city name"
+      required [minlength]="3">
+    <ng-container *ngIf="inputQuery.invalid && inputQuery.touched">
+      <div class="error" *ngIf="inputQuery.errors?.['required']">Search is required!</div>
+      <div class="error" *ngIf="inputQuery.errors?.['minlength']">Search must be at least 3 characters long!
+      </div>
+    </ng-container>
+    <button class="button-list" [disabled]="inputQuery.invalid" (click)="onSearch(inputQuery.value)">Search</button>
+  </div>
+
+<ng-container *ngIf="tripsFound">  
+   
+    <div *ngIf="isLoading">
+      <app-loader class="loading"></app-loader>
+    </div>
+
+    <h2>Results:</h2>
+    <div class="search-result">
+      <ng-container *ngIf="hasResult; else noResult">
+        <div *ngFor="let trip of tripsFound" class="card-box">
+          <img src="{{trip.imageUrl}}">
+          <div>
+            <div class="text-center">
+              <p class="name"><i class="fas fa-route"></i><span>-From: {{trip.startPoint}} </span> -<span>To:
+                  {{trip.endPoint}} </span></p>
+              <p class="artist"><i class="far fa-calendar-alt"></i> Date: <span>{{trip.date}}</span></p>
+              <p class="genre"><i class="far fa-clock"></i> Time: <span>{{trip.time}}</span></p>
+              <p class="price"><i class="fas fa-hand-holding-usd"></i> Price: <span>{{trip.price}}</span> BGN</p>
+            </div>
+            <div class="btn-group" *ngIf="isLogged">
+              <a [routerLink]="['/trip','details', trip._id]" id="details">Details</a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noResult>
+        <p class="no-result" #noResult>Sorry, no matching results.</p>
+      </ng-template>
+    </div>
+
+  </ng-container>
+  <!-- <ng-template #loading>
+    <app-loader class="loading"></app-loader>
+  </ng-template> -->
+</section>
