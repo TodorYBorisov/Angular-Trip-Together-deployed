@@ -61,7 +61,7 @@ The project incorporates several security enhancements:
 
 ## Installation
 To run Trip Together locally, follow these steps:
-1. Clone the [repository](https://github.com/TodorYBorisov/Angular-Trip-Together-running-locally.git) to your local machine
+1. Clone the repository to your local machine
 2. Navigate to the project's root directory in your terminal
 3. Install the dependencies of both trip together app and rest server, using the package manager of your choice
 4. Install MongoDB Compass to store the data on your local machine
@@ -80,6 +80,8 @@ The Angular frontend of Trip Together is deployed on [Netlify](https://www.netli
 - Database
 
 The MongoDB database used for Trip Together is hosted on [MongoDB Cloud](https://cloud.mongodb.com). MongoDB Cloud provides a dependable and expandable solutions for storing data for the application
+
+In case of (CORS) error install addon/extension:![CORS Everywhere](trip-together/src/assets/images/Firefox.JPG) CORS Everywhere for Firefox and ![Chrome](trip-together/src/assets/images/Chrome.JPG)
 
 ## Project architecture
 - App Module
